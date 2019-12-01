@@ -1,0 +1,3 @@
+
+
+-a always,exit -F arch=b64 -S kill -F a0=1 -k kill_signals

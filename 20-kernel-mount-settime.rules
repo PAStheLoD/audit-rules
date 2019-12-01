@@ -1,0 +1,36 @@
+# Rules -----------------------------------------------------------------------
+
+## Kernel parameters
+-w /etc/sysctl.conf -p wa -k sysctl
+
+## Kernel module loading and unloading
+-a always,exit -F perm=x -F auid!=-1 -F path=/sbin/insmod -k modules
+-a always,exit -F perm=x -F auid!=-1 -F path=/sbin/modprobe -k modules
+-a always,exit -F perm=x -F auid!=-1 -F path=/sbin/rmmod -k modules
+-a always,exit -F arch=b64 -S finit_module -S init_module -S delete_module -F auid!=-1 -k modules
+-a always,exit -F arch=b32 -S finit_module -S init_module -S delete_module -F auid!=-1 -k modules
+## Modprobe configuration
+-w /etc/modprobe.conf -p wa -k modprobe
+
+## KExec usage (all actions)
+-a always,exit -F arch=b64 -S kexec_load -k KEXEC
+-a always,exit -F arch=b32 -S sys_kexec_load -k KEXEC
+
+## Special files
+-a exit,always -F arch=b32 -S mknod -S mknodat -k specialfiles
+-a exit,always -F arch=b64 -S mknod -S mknodat -k specialfiles
+
+## Mount operations (only attributable)
+-a always,exit -F arch=b64 -S mount -S umount2 -F auid!=-1 -k mount
+-a always,exit -F arch=b32 -S mount -S umount -S umount2 -F auid!=-1 -k mount
+
+# Change swap (only attributable)
+-a always,exit -F arch=b64 -S swapon -S swapoff -F auid!=-1 -k swap
+-a always,exit -F arch=b32 -S swapon -S swapoff -F auid!=-1 -k swap
+
+## Time
+-a exit,always -F arch=b32 -S adjtimex -S settimeofday -S clock_settime -k time
+-a exit,always -F arch=b64 -S adjtimex -S settimeofday -S clock_settime -k time
+### Local time zone
+-w /etc/localtime -p wa -k localtime
+

@@ -1,0 +1,22 @@
+
+
+-w /bin/systemctl -p x -k systemd
+
+
+## Process ID change (switching accounts) applications
+-w /bin/su -p x -k priv_esc
+-w /usr/bin/sudo -p x -k priv_esc
+-w /etc/sudoers -p rw -k priv_esc
+
+## Power state
+-w /sbin/shutdown -p x -k power
+-w /sbin/poweroff -p x -k power
+-w /sbin/reboot -p x -k power
+-w /sbin/halt -p x -k power
+
+
+# DPKG / APT-GET (Debian/Ubuntu)
+-w /usr/bin/dpkg -p x -k software_mgmt
+-w /usr/bin/apt-add-repository -p x -k software_mgmt
+-w /usr/bin/apt-get -p x -k software_mgmt
+-w /usr/bin/aptitude -p x -k software_mgmt

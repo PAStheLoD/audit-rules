@@ -1,0 +1,5 @@
+-w /root -p wa -k root_homedir
+
+## Root command executions
+-a exit,always -F arch=b64 -F euid=0 -S execve -k root_execve
+-a exit,always -F arch=b32 -F euid=0 -S execve -k root_execve
