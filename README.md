@@ -13,3 +13,5 @@ TODO
 * filter out UDP 53 (DNS queries)
 * create rules that match shell executions (though there's already root_execve, so eventually everything is covered)
 * filter out things that root does but is expected (eg started from cron)
+* wrap augenrules --load and instead of hardcoding postfix UID get it from /etc/passwd .. :|
+

@@ -10,3 +10,8 @@
 -a always,exit -F arch=b32 -S connect -F a2=28 -F success=1 -F key=network_connect_6
 
 
+## https://www.redhat.com/archives/linux-audit/2015-February/msg00015.html
+
+
+## maybe filter on inet address family? (to only match IP and don't log NETLINK stuff?)
+## https://github.com/linux-audit/audit-kernel/issues/64
